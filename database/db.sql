@@ -7,15 +7,56 @@
 -- ```
 
 
+-- CREATE TABLE member (
+--     member_id INT AUTO_INCREMENT  PRIMARY KEY,
+--     member_name VARCHAR(255) NOT NULL,
+--     member_email VARCHAR(255) NOT NULL,
+--     member_PASSWORD VARCHAR(255) NOT NULL,
+--     member_phone VARCHAR(20),
+--     member_ADDRESS VARCHAR(255),
+--     member_hight DECIMAL(5,2),
+--     member_weight DECIMAL(5,2),
+--     member_token VARCHAR(255),
+--     member_type int
+-- );
+
+-- CREATE TABLE gym (
+--     gym_id INT AUTO_INCREMENT  PRIMARY KEY,
+--     gym_name VARCHAR(255) NOT NULL,
+--     gym_address VARCHAR(255),
+--     gym_phone VARCHAR(20),
+--     gym_email VARCHAR(255),
+--     gym_photos TEXT
+-- );
+
+-- CREATE TABLE payment (
+--     payment_id INT AUTO_INCREMENT  PRIMARY KEY,
+--     payment_date DATE NOT NULL,
+--     payment_amount DECIMAL(10,2) NOT NULL,
+--     payment_type VARCHAR(50) NOT NULL,
+--     payment_status VARCHAR(50) NOT NULL,
+--     member_id INT,
+--     gym_id INT,
+--     FOREIGN KEY (member_id) REFERENCES member(member_id),
+--     FOREIGN KEY (gym_id) REFERENCES gym(gym_id)
+-- );
+
+-- CREATE TABLE report (
+--     report_id INT AUTO_INCREMENT  PRIMARY KEY,
+--     date DATE NOT NULL
+-- );
 CREATE TABLE member (
     member_id INT AUTO_INCREMENT PRIMARY KEY,
     member_name VARCHAR(255) NOT NULL,
-    member_email VARCHAR(255) NOT NULL,
-    member_PASSWORD VARCHAR(255) NOT NULL,
+    member_email VARCHAR(255) NOT NULL UNIQUE,
+    member_password VARCHAR(255) NOT NULL,
     member_phone VARCHAR(20),
-    member_ADDRESS VARCHAR(255),
-    member_hight DECIMAL(5,2),
-    member_weight DECIMAL(5,2)
+    member_address VARCHAR(255),
+    member_height DECIMAL(5,2),
+    member_weight DECIMAL(5,2),
+    member_token VARCHAR(255) UNIQUE,
+    member_type INT,
+    token_expiry DATETIME
 );
 
 CREATE TABLE gym (
@@ -23,7 +64,7 @@ CREATE TABLE gym (
     gym_name VARCHAR(255) NOT NULL,
     gym_address VARCHAR(255),
     gym_phone VARCHAR(20),
-    gym_email VARCHAR(255),
+    gym_email VARCHAR(255) NOT NULL UNIQUE,
     gym_photos TEXT
 );
 
@@ -44,6 +85,7 @@ CREATE TABLE report (
     date DATE NOT NULL
 );
 
+
 -- Index for the 'member' table
 CREATE INDEX idx_member_email ON member(member_email);
 CREATE INDEX idx_member_phone ON member(member_phone);
@@ -63,3 +105,4 @@ CREATE INDEX idx_payment_status ON payment(payment_status);
 
 -- Index for the 'report' table
 CREATE INDEX idx_report_date ON report(date);
+
