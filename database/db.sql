@@ -91,6 +91,7 @@ CREATE INDEX idx_member_email ON member(member_email);
 CREATE INDEX idx_member_phone ON member(member_phone);
 CREATE INDEX idx_member_name ON member(member_name);
 
+
 -- Index for the 'gym' table
 CREATE INDEX idx_gym_name ON gym(gym_name);
 CREATE INDEX idx_gym_address ON gym(gym_address);
