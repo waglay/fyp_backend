@@ -1,5 +1,6 @@
 <?php
 require_once '../database/Database.php';
+header('Content-Type: application/json');
 
 try {
     $db = Database::getInstance();

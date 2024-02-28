@@ -1,7 +1,7 @@
 <?php
 // Include the database connection file
 require_once '../database/Database.php';
-
+header('Content-Type: application/json');
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the database connection

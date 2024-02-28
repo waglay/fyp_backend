@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+header('Content-Type: application/json');
 if (!isset($_SESSION['id'])) {
     header("Location: ../index.php");
     exit();

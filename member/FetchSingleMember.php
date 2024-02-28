@@ -1,6 +1,6 @@
 <?php
 require_once '../database/Database.php';
-
+header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
     echo json_encode(["message" => "Method not allowed"]);
