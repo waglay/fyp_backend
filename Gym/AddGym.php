@@ -1,8 +1,10 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-if (!isset($_SESSION['id'])) {
-    header("Location: ../index.php");
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    echo json_encode(["message" => "Method not allowed"]);
     exit();
 }
 
