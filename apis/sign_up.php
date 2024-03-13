@@ -122,8 +122,8 @@ try {
     $sql = "INSERT INTO member (member_name, member_email, member_password, member_phone, member_address, member_height, member_weight, member_token, member_type, token_expiry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
-    $member_phon= isset($data['member_phone']) ? $data['member_phone'] : null;
-    $member_addres= isset($data['member_address']) ? $data['member_address'] : null;
+    $member_phone= isset($data['member_phone']) ? $data['member_phone'] : null;
+    $member_address= isset($data['member_address']) ? $data['member_address'] : null;
     $member_heigh= isset($data['member_height']) ? $data['member_height'] : null;
     $member_weigh    = isset($data['member_weight']) ? $data['member_weight'] : null;
     $member_type = isset($data['member_type']) ? $data['member_type'] : null;
