@@ -116,10 +116,10 @@ try {
     $hashedPassword = password_hash($data['member_password'], PASSWORD_DEFAULT);
 
     // Generate a token
-    $token = bin2hex(random_bytes(16)); // Generate a random token
+    // $token = bin2hex(random_bytes(16)); // Generate a random token
 
     // Prepare the SQL statement with optional fields
-    $sql = "INSERT INTO member (member_name, member_email, member_password, member_phone, member_address, member_height, member_weight, member_token, member_type, token_expiry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO member (member_name, member_email, member_password, member_phone, member_address, member_height, member_weight, member_type, token_expiry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     $member_phone= isset($data['member_phone']) ? $data['member_phone'] : null;
@@ -138,7 +138,7 @@ try {
         $member_address,
         $member_height,
         $member_weight,
-        $token,
+        // $token,
         $member_type,
         $token_expiry
     );
