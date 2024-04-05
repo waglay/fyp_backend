@@ -80,10 +80,22 @@ try {
     if ($user) {
         // Verify the password
         if (password_verify($password, $user['member_password'])) {
-            // Login successful
-            unset($user['member_password']);
-            http_response_code(200);
-            echo json_encode(['message' => 'Login successful', 'member' => $user]);
+
+            $token = bin2hex(random_bytes(16));
+            $stmt = $conn->prepare("insert into api_tokens (token, member_id, `date updated`) values (?, ?, sysdate())");
+            $stmt->bind_param("ss", $token, $user['member_id']);
+            $success = $stmt->execute();
+            if ($success) {
+                // Login successful
+                unset($user['member_password']);
+                unset($user['member_token']);
+                http_response_code(200);
+                echo json_encode(['message' => 'Login successful', 'member' => $user, 'Token' => $token]);
+            } else {
+                // Update failed
+                http_response_code(500);
+                echo json_encode(['message' => 'Update failed']);
+            }
         } else {
             // Login failed
             http_response_code(401);
