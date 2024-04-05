@@ -115,7 +115,7 @@ $member_address = isset($_POST['member_address']) ? $_POST['member_address'] : '
 $member_password = isset($_POST['member_password']) ? $_POST['member_password'] : '';
 $member_height = isset($_POST['member_height']) ? $_POST['member_height'] : '';
 $member_weight = isset($_POST['member_weight']) ? $_POST['member_weight'] : '';
-$member_type = isset($_POST['member_type']) ? $_POST['member_type'] : '';
+$member_type = isset($_POST['member_type']) ? $_POST['member_type'] : '1';
 
 if (!$member_id) {
     http_response_code(400);
@@ -152,11 +152,21 @@ $stmt = $conn->prepare("UPDATE member SET member_name = ?, member_email = ?, mem
 $stmt->bind_param("ssssssssi", $member_name, $member_email, $member_phone, $member_address, $member_height, $member_weight, $member_type, $member_image_url, $member_id);
 
 if ($stmt->execute()) {
+    $stmt = $conn->prepare("SELECT * FROM member WHERE member_id = ?");
+    $stmt->bind_param("i", $member_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $member = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    // Remove sensitive information from the response
+    unset($member['member_password']);
     http_response_code(200);
-    echo json_encode(["message" => "Member updated successfully"]);
+    echo json_encode(["message" => "Member updated successfully", "member" => $member]);
 } else {
     http_response_code(500);
     echo json_encode(["message" => "Failed to update member"]);
+    $stmt->close();
 }
-
-$stmt->close();
