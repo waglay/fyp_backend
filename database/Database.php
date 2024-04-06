@@ -1,24 +1,13 @@
 <?php
-// $host = "localhost";      // insert localhost
-// $dbName = "fyp";    // insert database name
-// $user = "root";
-// $pass = "";
-
-// // mysqli_connect($host, $user, $pass, $dbName) or die("Database connection failed!");
-// $conn = new mysqli($host, $user, $pass, $dbName);
-// if ($conn->connect_error) {
-//     die("Database connection failed!" . $conn->connect_error);
-// } else {
-//     // echo "Database connection successful!";
-// }
-// ###############
 
 
-class Database {
+class Database
+{
     private static $instance = null;
     private $conn;
 
-    private function __construct() {
+    private function __construct()
+    {
         $host = "localhost";
         $dbName = "fyp";
         $user = "root";
@@ -33,18 +22,21 @@ class Database {
         $this->conn->set_charset("utf8");
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (!self::$instance) {
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn;
     }
     // Destructor method to close the connection
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->conn) {
             $this->conn->close();
         }
