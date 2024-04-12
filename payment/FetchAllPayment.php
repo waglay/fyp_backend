@@ -2,7 +2,7 @@
 include('../database/Database.php');
 
 header('Content-Type: application/json');
-
+header("Access-Control-Allow-Origin: *");
 try {
     $db = Database::getInstance();
     $conn = $db->getConnection();

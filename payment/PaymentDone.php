@@ -1,6 +1,6 @@
 <?php
 require '../database/Database.php'; // Assuming Database class is in the same directory
-
+header("Access-Control-Allow-Origin: *");
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

@@ -3,7 +3,6 @@ include('../database/Database.php');
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
-
 try {
     $db = Database::getInstance();
     $conn = $db->getConnection();
@@ -12,8 +11,8 @@ try {
     echo json_encode(["message" => "Database connection failed: " . $e->getMessage()]);
     exit();
 }
-
-$stmt = $conn->prepare("SELECT * FROM gym");
+$member_id = $_GET['member_id'];
+$stmt = $conn->prepare("SELECT * FROM gym where owner_id = '$member_id'");-
 $stmt->execute();
 $result = $stmt->get_result();
 

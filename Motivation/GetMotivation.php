@@ -1,5 +1,6 @@
 <?php
 require_once "../database/Database.php";
+header("Access-Control-Allow-Origin: *");
 
 function getAllMotivations($conn)
 {

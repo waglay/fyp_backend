@@ -2,6 +2,7 @@
 include('../database/Database.php');
 
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
@@ -38,6 +39,3 @@ if ($result->num_rows >   0) {
     http_response_code(404);
     echo json_encode(["message" => "Gym not found"]);
 }
-
-$stmt->close();
-?>
