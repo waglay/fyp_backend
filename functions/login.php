@@ -10,18 +10,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the SQL statement
     $result = $conn->query($sql);
-    echo "done";
+    // echo "done";
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $userPasswordHash = $row['password'];
+        $userPasswordHash = $row['member_password'];
 
-        header("Location: ../dashboard.php");
+
+        // header("Location: ../dashboard.php");
         // Verify the password
         if (password_verify($password, $userPasswordHash)) {
             $_SESSION['id'] = $row['member_id'];
             $_SESSION['type'] = $row['member_type'];
-            $_SESSION['user'] = $row;
+            $_SESSION['user'] = $row['member_name'];
+            $_SESSION['user_detail'] = $row;
             echo "Login successful. Redirecting..."; // Debugging statement
             header("Location: ../dashboard.php");
             exit();
