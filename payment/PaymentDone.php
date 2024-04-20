@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn = $db->getConnection();
 
         // Calculate payment_date and tillwhen
+        // $payment_date = date("Y-m-d");
         $payment_date = date("Y-m-d");
         // $tillwhen = date("Y-m-d", strtotime("+$months months"));
         $tillwhen = date("Y-m-d", strtotime("$date +$months months"));
