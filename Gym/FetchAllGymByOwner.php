@@ -12,7 +12,7 @@ try {
     exit();
 }
 $member_id = $_GET['member_id'];
-$stmt = $conn->prepare("SELECT * FROM gym where owner_id = '$member_id'");-
+$stmt = $conn->prepare("SELECT * FROM gym where owner_id = '$member_id'");
 $stmt->execute();
 $result = $stmt->get_result();
 
