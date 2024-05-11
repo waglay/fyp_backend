@@ -12,7 +12,7 @@ try {
     exit();
 }
 
-$stmt = $conn->prepare("SELECT * FROM payment");
+$stmt = $conn->prepare("SELECT payment.*, member.*, gym.* FROM payment JOIN member on member.member_id=payment.member_id join gym on gym.gym_id=payment.gym_id ORDER BY payment.payment_id DESC");
 $stmt->execute();
 $result = $stmt->get_result();
 header('Content-Type: application/json');
