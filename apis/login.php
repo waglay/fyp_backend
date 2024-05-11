@@ -6,6 +6,8 @@ if (isset($_SESSION['id'])) {
 
 require '../database/Database.php';
 session_start();
+header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json');
 try {
     // Get the database connection
     $db = Database::getInstance();
