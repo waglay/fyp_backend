@@ -21,7 +21,14 @@ if (!isset($_GET['gym_id'])) {
     // Your logic here, e.g., processing the request with the memberId
 }
 
-$stmt = $conn->prepare("SELECT payment.*, member.* FROM payment JOIN member on member.member_id=payment.member_id WHERE payment.gym_id = ?");
+// $stmt = $conn->prepare("SELECT payment.*, member.*, gym.* FROM payment JOIN member on member.member_id=payment.member_id join gym on gym.gym_id=payment.gym_id ORDER BY payment.payment_id DESC where payment.gym_id = ?");
+$stmt = $conn->prepare("SELECT payment.*, member.*, gym.* 
+FROM payment 
+JOIN member ON member.member_id = payment.member_id 
+JOIN gym ON gym.gym_id = payment.gym_id 
+WHERE gym.gym_id = ? 
+ORDER BY payment.payment_id DESC;
+");
 $stmt->bind_param("i", $gym_id);
 $stmt->execute();
 $result = $stmt->get_result();
